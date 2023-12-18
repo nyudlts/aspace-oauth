@@ -12,8 +12,10 @@ class OauthController < ApplicationController
     pw              = "aspace-oauth-#{auth_hash[:provider]}-#{SecureRandom.uuid}"
     pw_path         = File.join(Dir.tmpdir, pw)
     backend_session = nil
-    email           = AspaceOauth.get_email(auth_hash)
-    username        = AspaceOauth.use_uid? ? auth_hash.uid : email
+    #email           = AspaceOauth.get_email(auth_hash)
+    #username        = AspaceOauth.use_uid? ? auth_hash.uid : email
+    username        = auth_hash["extra"]["raw_info"]["urn:oid:0.9.2342.19200300.100.1.1"]
+    email           = username+"@nyu.edu"
 
     puts "Received callback for user: #{username}"
 
